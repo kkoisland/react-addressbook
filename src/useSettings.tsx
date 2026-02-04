@@ -40,8 +40,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 		return defaultSettings;
 	});
 
-	const [systemDark, setSystemDark] = useState(() =>
-		window.matchMedia("(prefers-color-scheme: dark)").matches,
+	const [systemDark, setSystemDark] = useState(
+		() => window.matchMedia("(prefers-color-scheme: dark)").matches,
 	);
 
 	// Listen for system theme changes
@@ -78,7 +78,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 	};
 
 	return (
-		<SettingsContext.Provider value={{ theme: settings.theme, setTheme, isDarkMode }}>
+		<SettingsContext.Provider
+			value={{ theme: settings.theme, setTheme, isDarkMode }}
+		>
 			{children}
 		</SettingsContext.Provider>
 	);
