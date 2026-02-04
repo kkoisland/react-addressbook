@@ -61,7 +61,12 @@ export const defaultOptions: AppOptions = {
 	statusPermOptions: [
 		{ id: "statusPermYes", label: "Yes", order: 1, active: true },
 		{ id: "statusPermNo", label: "No", order: 2, active: true },
-		{ id: "statusPermNotThisYear", label: "Not this year", order: 3, active: true },
+		{
+			id: "statusPermNotThisYear",
+			label: "Not this year",
+			order: 3,
+			active: true,
+		},
 		{ id: "statusPermTemp", label: "Temp", order: 4, active: true },
 		{ id: "statusPermMessage", label: "Message", order: 5, active: true },
 	],
