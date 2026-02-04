@@ -1,25 +1,23 @@
-import { useEffect, useState } from "react";
+import { useSettings } from "./useSettings.tsx";
 
 function App() {
-	const [isDark, setIsDark] = useState(() => {
-		return document.documentElement.classList.contains("dark");
-	});
+	const { isDarkMode, setTheme, theme } = useSettings();
 
-	useEffect(() => {
-		if (isDark) {
-			document.documentElement.classList.add("dark");
+	const toggleTheme = () => {
+		if (theme === "system") {
+			setTheme(isDarkMode ? "light" : "dark");
 		} else {
-			document.documentElement.classList.remove("dark");
+			setTheme(isDarkMode ? "light" : "dark");
 		}
-	}, [isDark]);
+	};
 
 	return (
 		<div className="min-h-screen bg-white text-gray-800 dark:bg-slate-900 dark:text-slate-200 p-4">
 			<div className="flex justify-between items-center">
 				<h1 className="text-2xl font-bold">Address Book</h1>
 				<div className="flex items-center gap-4">
-					<button type="button" onClick={() => setIsDark(!isDark)}>
-						{isDark ? "☀️" : "🌙"}
+					<button type="button" onClick={toggleTheme}>
+						{isDarkMode ? "☀️" : "🌙"}
 					</button>
 				</div>
 			</div>
