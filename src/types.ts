@@ -187,9 +187,9 @@ export const defaultImportConfigs: ImportConfig[] = [
 		deletable: false,
 	},
 	{
-		id: "filemaker",
-		name: "FileMaker Export",
-		description: "FileMaker Pro export format (no header)",
+		id: "legacyCsv",
+		name: "Legacy CSV",
+		description: "Old export format (no header)",
 		columnMapping: {
 			title: 6,
 			name: 7,

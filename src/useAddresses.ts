@@ -35,6 +35,10 @@ export function useAddresses() {
 		setAddresses((prev) => prev.filter((addr) => addr.id !== id));
 	};
 
+	const clearAllAddresses = (): void => {
+		setAddresses([]);
+	};
+
 	const getAddressById = (id: string): Address | undefined => {
 		return addresses.find((addr) => addr.id === id);
 	};
@@ -44,6 +48,7 @@ export function useAddresses() {
 		addAddress,
 		updateAddress,
 		deleteAddress,
+		clearAllAddresses,
 		getAddressById,
 	};
 }

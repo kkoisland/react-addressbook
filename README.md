@@ -6,7 +6,7 @@ A personal address book application built with React + TypeScript.
 
 - CRUD operations for contacts
 - Print labels (JP/US formats)
-- Import from CSV (FileMaker compatible)
+- Import from CSV 
 - Dark/Light mode support
 
 ## Tech Stack
