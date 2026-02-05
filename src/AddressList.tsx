@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { AddressCard } from "./AddressCard";
-import { AddressForm } from "./AddressForm";
-import { AddressSearchPanel } from "./AddressSearchPanel";
+import AddressCard from "./AddressCard";
+import AddressForm from "./AddressForm";
+import AddressSearchPanel from "./AddressSearchPanel";
 import type { Address } from "./types";
 import { type SearchField, useFilter } from "./useFilter";
 
@@ -23,12 +23,12 @@ interface AddressListProps {
 	deleteAddress: (id: string) => void;
 }
 
-export function AddressList({
+const AddressList = ({
 	addresses,
 	addAddress,
 	updateAddress,
 	deleteAddress,
-}: AddressListProps) {
+}: AddressListProps) => {
 	const {
 		searchQuery,
 		setSearchQuery,
@@ -269,4 +269,6 @@ export function AddressList({
 			</div>
 		</div>
 	);
-}
+};
+
+export default AddressList;

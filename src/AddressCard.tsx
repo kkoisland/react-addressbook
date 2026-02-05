@@ -7,12 +7,12 @@ interface AddressCardProps {
 	onDelete: (id: string) => void;
 }
 
-export function AddressCard({
+const AddressCard = ({
 	address,
 	isSelected,
 	onSelect,
 	onDelete,
-}: AddressCardProps) {
+}: AddressCardProps) => {
 	const latestReply = address.replyStatuses[0];
 
 	return (
@@ -46,4 +46,6 @@ export function AddressCard({
 			</td>
 		</tr>
 	);
-}
+};
+
+export default AddressCard;

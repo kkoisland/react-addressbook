@@ -4,7 +4,8 @@
 			"Bash(pnpm biome:check:*)",
 			"Bash(pnpm biome:fix:*)",
 			"Bash(head:*)",
-			"Bash(python3:*)"
+			"Bash(python3:*)",
+			"Bash(pnpm build:*)"
 		]
 	}
 }

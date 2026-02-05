@@ -1,8 +1,8 @@
 import type { Address, Email, Phone, ReplyStatus } from "./types";
-import { generateUuid } from "./utilsUuid";
+import generateUuid from "./utilsUuid";
 
 // Parse a single CSV line handling quoted fields
-export function parseCsvLine(line: string): string[] {
+const parseCsvLine = (line: string): string[] => {
 	const result: string[] = [];
 	let current = "";
 	let inQuotes = false;
@@ -37,14 +37,14 @@ export function parseCsvLine(line: string): string[] {
 	}
 	result.push(current);
 	return result;
-}
+};
 
 // UUID pattern for record detection
 const UUID_PATTERN =
 	/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/;
 
 // Split to export into records
-export function splitRecords(content: string): string[][] {
+const splitRecords = (content: string): string[][] => {
 	// Data may export with different line endings: \r\n, \n, or \r (Mac classic)
 	const records: string[][] = [];
 
@@ -80,7 +80,7 @@ export function splitRecords(content: string): string[][] {
 	}
 
 	return records;
-}
+};
 
 // cvs data column mapping (0-indexed)
 // Format: UUID, Created, Admin, Modified, Admin, then data fields...
@@ -172,7 +172,7 @@ function mapReplyType(value: string): string | null {
 }
 
 // Parse addresses CSV
-export function parseAddresses(content: string): Map<string, Partial<Address>> {
+const parseAddresses = (content: string): Map<string, Partial<Address>> => {
 	const records = splitRecords(content);
 	const addressMap = new Map<string, Partial<Address>>();
 
@@ -197,10 +197,10 @@ export function parseAddresses(content: string): Map<string, Partial<Address>> {
 	}
 
 	return addressMap;
-}
+};
 
 // Parse phones CSV
-export function parsePhones(content: string): Map<string, Phone[]> {
+const parsePhones = (content: string): Map<string, Phone[]> => {
 	const records = splitRecords(content);
 	const phoneMap = new Map<string, Phone[]>();
 
@@ -222,10 +222,10 @@ export function parsePhones(content: string): Map<string, Phone[]> {
 	}
 
 	return phoneMap;
-}
+};
 
 // Parse emails CSV
-export function parseEmails(content: string): Map<string, Email[]> {
+const parseEmails = (content: string): Map<string, Email[]> => {
 	const records = splitRecords(content);
 	const emailMap = new Map<string, Email[]>();
 
@@ -247,12 +247,10 @@ export function parseEmails(content: string): Map<string, Email[]> {
 	}
 
 	return emailMap;
-}
+};
 
 // Parse reply status CSV
-export function parseReplyStatuses(
-	content: string,
-): Map<string, ReplyStatus[]> {
+const parseReplyStatuses = (content: string): Map<string, ReplyStatus[]> => {
 	const records = splitRecords(content);
 	const replyMap = new Map<string, ReplyStatus[]>();
 
@@ -274,15 +272,15 @@ export function parseReplyStatuses(
 	}
 
 	return replyMap;
-}
+};
 
 // Merge all data into Address array
-export function mergeData(
+const mergeData = (
 	addressMap: Map<string, Partial<Address>>,
 	phoneMap: Map<string, Phone[]>,
 	emailMap: Map<string, Email[]>,
 	replyMap: Map<string, ReplyStatus[]>,
-): Address[] {
+): Address[] => {
 	const now = new Date().toISOString();
 	const addresses: Address[] = [];
 
@@ -308,7 +306,7 @@ export function mergeData(
 	}
 
 	return addresses;
-}
+};
 
 export interface ImportResult {
 	success: boolean;
@@ -320,12 +318,12 @@ export interface ImportResult {
 }
 
 // Main import function
-export function importData(
+const importData = (
 	addressesContent: string,
 	phonesContent: string | null,
 	emailsContent: string | null,
 	replyContent: string | null,
-): ImportResult {
+): ImportResult => {
 	const errors: string[] = [];
 
 	try {
@@ -370,4 +368,15 @@ export function importData(
 			],
 		};
 	}
-}
+};
+
+export {
+	parseCsvLine,
+	splitRecords,
+	parseAddresses,
+	parsePhones,
+	parseEmails,
+	parseReplyStatuses,
+	mergeData,
+	importData,
+};

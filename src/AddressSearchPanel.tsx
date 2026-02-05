@@ -11,12 +11,12 @@ interface AddressSearchPanelProps {
 	addresses: Address[];
 }
 
-export function AddressSearchPanel({
+const AddressSearchPanel = ({
 	filters,
 	onChange,
 	onClear,
 	addresses,
-}: AddressSearchPanelProps) {
+}: AddressSearchPanelProps) => {
 	const printTypes = defaultOptions.printTypeOptions.filter((o) => o.active);
 	const statusPermOptions = defaultOptions.statusPermOptions.filter(
 		(o) => o.active,
@@ -282,4 +282,6 @@ export function AddressSearchPanel({
 			</div>
 		</form>
 	);
-}
+};
+
+export default AddressSearchPanel;

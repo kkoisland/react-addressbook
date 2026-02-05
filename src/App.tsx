@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { AddressList } from "./AddressList";
-import { ImportPage } from "./ImportPage";
+import AddressList from "./AddressList";
+import ImportPage from "./ImportPage";
 import type { Address } from "./types";
-import { useAddresses } from "./useAddresses";
-import { useSettings } from "./useSettings.tsx";
+import useAddresses from "./useAddresses";
+import { useSettings } from "./useSettings";
 
 type Page = "list" | "import";
 

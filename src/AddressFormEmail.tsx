@@ -1,13 +1,13 @@
 import type { Email } from "./types";
 import { defaultOptions } from "./types";
-import { generateUuid } from "./utilsUuid";
+import generateUuid from "./utilsUuid";
 
 interface AddressFormEmailProps {
 	emails: Email[];
 	onChange: (emails: Email[]) => void;
 }
 
-export function AddressFormEmail({ emails, onChange }: AddressFormEmailProps) {
+const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 	const emailTypes = defaultOptions.emailTypeOptions.filter((o) => o.active);
 
 	const addEmail = () => {
@@ -70,4 +70,6 @@ export function AddressFormEmail({ emails, onChange }: AddressFormEmailProps) {
 			))}
 		</div>
 	);
-}
+};
+
+export default AddressFormEmail;
