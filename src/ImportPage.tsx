@@ -20,13 +20,13 @@ const IMPORT_FILES = {
 const buttonStyle =
 	"px-4 py-2 text-sm border rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed";
 
-export function ImportPage({
+const ImportPage = ({
 	onImport,
 	onClearAll,
 	onBack,
 	existingCount,
 	addresses,
-}: ImportPageProps) {
+}: ImportPageProps) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState<{
 		success: boolean;
@@ -206,4 +206,6 @@ export function ImportPage({
 			</div>
 		</div>
 	);
-}
+};
+
+export default ImportPage;

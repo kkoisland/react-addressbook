@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
+const useLocalStorage = <T>(key: string, initialValue: T) => {
 	const [value, setValue] = useState<T>(() => {
 		const stored = localStorage.getItem(key);
 		if (stored) {
@@ -18,4 +18,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 	}, [key, value]);
 
 	return [value, setValue] as const;
-}
+};
+
+export default useLocalStorage;

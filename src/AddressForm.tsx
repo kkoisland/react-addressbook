@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { AddressFormEmail } from "./AddressFormEmail";
-import { AddressFormPhone } from "./AddressFormPhone";
-import { AddressFormReplyStatus } from "./AddressFormReplyStatus";
+import AddressFormEmail from "./AddressFormEmail";
+import AddressFormPhone from "./AddressFormPhone";
+import AddressFormReplyStatus from "./AddressFormReplyStatus";
 import type { Address, Email, Phone, ReplyStatus } from "./types";
 import { defaultOptions } from "./types";
 
@@ -27,12 +27,12 @@ const emptyAddress = {
 	replyStatuses: [] as ReplyStatus[],
 };
 
-export function AddressForm({
+const AddressForm = ({
 	address,
 	onSave,
 	onUpdate,
 	onCancel,
-}: AddressFormProps) {
+}: AddressFormProps) => {
 	const [formData, setFormData] = useState(emptyAddress);
 
 	useEffect(() => {
@@ -270,4 +270,6 @@ export function AddressForm({
 			</div>
 		</form>
 	);
-}
+};
+
+export default AddressForm;

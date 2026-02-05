@@ -1,12 +1,12 @@
 import type { Address } from "./types";
-import { useLocalStorage } from "./useLocalStorage";
-import { generateUuid } from "./utilsUuid";
+import useLocalStorage from "./useLocalStorage";
+import generateUuid from "./utilsUuid";
 
 const STORAGE_KEY = "addressbook_addresses";
 
 type NewAddress = Omit<Address, "id" | "createdAt" | "updatedAt">;
 
-export function useAddresses() {
+const useAddresses = () => {
 	const [addresses, setAddresses] = useLocalStorage<Address[]>(STORAGE_KEY, []);
 
 	const addAddress = (data: NewAddress): Address => {
@@ -51,4 +51,6 @@ export function useAddresses() {
 		clearAllAddresses,
 		getAddressById,
 	};
-}
+};
+
+export default useAddresses;

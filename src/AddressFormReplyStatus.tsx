@@ -1,16 +1,16 @@
 import type { ReplyStatus } from "./types";
 import { defaultOptions } from "./types";
-import { generateUuid } from "./utilsUuid";
+import generateUuid from "./utilsUuid";
 
 interface AddressFormReplyStatusProps {
 	replyStatuses: ReplyStatus[];
 	onChange: (replyStatuses: ReplyStatus[]) => void;
 }
 
-export function AddressFormReplyStatus({
+const AddressFormReplyStatus = ({
 	replyStatuses,
 	onChange,
-}: AddressFormReplyStatusProps) {
+}: AddressFormReplyStatusProps) => {
 	const replyTypes = defaultOptions.replyTypeOptions.filter((o) => o.active);
 
 	const addReplyStatus = () => {
@@ -85,4 +85,6 @@ export function AddressFormReplyStatus({
 			))}
 		</div>
 	);
-}
+};
+
+export default AddressFormReplyStatus;

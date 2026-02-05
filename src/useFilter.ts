@@ -87,7 +87,7 @@ function matchesDropdownFilter(
 	return value === filter;
 }
 
-export function useFilter(addresses: Address[]) {
+const useFilter = (addresses: Address[]) => {
 	// Quick search bar state
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchField, setSearchField] = useState<SearchField>("all");
@@ -252,4 +252,6 @@ export function useFilter(addresses: Address[]) {
 		// Results
 		filteredAddresses,
 	};
-}
+};
+
+export { useFilter };

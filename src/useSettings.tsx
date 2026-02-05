@@ -27,7 +27,7 @@ const defaultSettings: Settings = {
 	theme: "system",
 };
 
-export function SettingsProvider({ children }: { children: ReactNode }) {
+const SettingsProvider = ({ children }: { children: ReactNode }) => {
 	const [settings, setSettings] = useState<Settings>(() => {
 		const stored = localStorage.getItem(STORAGE_KEY);
 		if (stored) {
@@ -84,12 +84,14 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 			{children}
 		</SettingsContext.Provider>
 	);
-}
+};
 
-export function useSettings() {
+const useSettings = () => {
 	const context = useContext(SettingsContext);
 	if (!context) {
 		throw new Error("useSettings must be used within SettingsProvider");
 	}
 	return context;
-}
+};
+
+export { SettingsProvider, useSettings };

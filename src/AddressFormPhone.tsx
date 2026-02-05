@@ -1,13 +1,13 @@
 import type { Phone } from "./types";
 import { defaultOptions } from "./types";
-import { generateUuid } from "./utilsUuid";
+import generateUuid from "./utilsUuid";
 
 interface AddressFormPhoneProps {
 	phones: Phone[];
 	onChange: (phones: Phone[]) => void;
 }
 
-export function AddressFormPhone({ phones, onChange }: AddressFormPhoneProps) {
+const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 	const phoneTypes = defaultOptions.phoneTypeOptions.filter((o) => o.active);
 
 	const addPhone = () => {
@@ -70,4 +70,6 @@ export function AddressFormPhone({ phones, onChange }: AddressFormPhoneProps) {
 			))}
 		</div>
 	);
-}
+};
+
+export default AddressFormPhone;
