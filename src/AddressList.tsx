@@ -3,7 +3,6 @@ import { AddressCard } from "./AddressCard";
 import { AddressForm } from "./AddressForm";
 import { AddressSearchPanel } from "./AddressSearchPanel";
 import type { Address } from "./types";
-import { useAddresses } from "./useAddresses";
 import { type SearchField, useFilter } from "./useFilter";
 
 const searchFieldOptions: { value: SearchField; label: string }[] = [
@@ -15,9 +14,21 @@ const searchFieldOptions: { value: SearchField; label: string }[] = [
 	{ value: "tempNote", label: "Temp Note" },
 ];
 
-export function AddressList() {
-	const { addresses, addAddress, updateAddress, deleteAddress } =
-		useAddresses();
+interface AddressListProps {
+	addresses: Address[];
+	addAddress: (
+		data: Omit<Address, "id" | "createdAt" | "updatedAt">,
+	) => Address;
+	updateAddress: (id: string, updates: Partial<Address>) => void;
+	deleteAddress: (id: string) => void;
+}
+
+export function AddressList({
+	addresses,
+	addAddress,
+	updateAddress,
+	deleteAddress,
+}: AddressListProps) {
 	const {
 		searchQuery,
 		setSearchQuery,

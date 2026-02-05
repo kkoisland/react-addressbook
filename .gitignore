@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Personal data 
+public/import-data/
+
 # Editor directories and files
 !.vscode/extensions.json
 .idea
