@@ -99,11 +99,6 @@ const useFilter = (addresses: Address[]) => {
 
 	// Filter logic
 	const filteredAddresses = useMemo(() => {
-		// In search mode, show empty until filters are entered
-		if (isSearchMode && !hasAnyAdvancedFilter(advancedFilters)) {
-			return [];
-		}
-
 		let result = addresses;
 
 		// Quick search bar filter (only in normal mode)

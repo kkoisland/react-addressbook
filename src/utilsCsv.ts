@@ -1,4 +1,4 @@
-import type { Address, Email, Phone, ReplyStatus } from "./types";
+import type { Address, Email, LabelType, Phone, ReplyStatus } from "./types";
 import generateUuid from "./utilsUuid";
 
 // Parse a single CSV line handling quoted fields
@@ -116,11 +116,11 @@ const FM_REPLY_MAPPING = {
 } as const;
 
 // Map option values to React option IDs
-function mapPrintType(value: string): string | null {
+function mapPrintType(value: string): LabelType | null {
 	if (!value || value.trim() === "") return null;
 	const v = value.toLowerCase().trim();
-	if (v.includes("label") && v.includes("j")) return "printLabelJp";
-	if (v.includes("label") && v.includes("us")) return "printLabelUs";
+	if (v.includes("label") && v.includes("j")) return "labelJp";
+	if (v.includes("label") && v.includes("us")) return "labelUs";
 	return null;
 }
 
