@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AddressFormEmail from "./AddressFormEmail";
 import AddressFormPhone from "./AddressFormPhone";
 import AddressFormReplyStatus from "./AddressFormReplyStatus";
-import type { Address, Email, Phone, ReplyStatus } from "./types";
+import type { Address, Email, LabelType, Phone, ReplyStatus } from "./types";
 import { defaultOptions } from "./types";
 
 interface AddressFormProps {
@@ -19,7 +19,7 @@ const emptyAddress = {
 	title: "",
 	note: "",
 	tempNote: "",
-	printType: null as string | null,
+	printType: "labelJp" as LabelType | null,
 	statusPerm: null as string | null,
 	statusNext: null as string | null,
 	phones: [] as Phone[],
@@ -160,7 +160,7 @@ const AddressForm = ({
 								onChange={(e) =>
 									setFormData({
 										...formData,
-										printType: e.target.value || null,
+										printType: (e.target.value || null) as LabelType | null,
 									})
 								}
 								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"

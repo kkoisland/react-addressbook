@@ -1,3 +1,6 @@
+// Label type for printing
+export type LabelType = "labelJp" | "labelUs";
+
 // Address (main table)
 export interface Address {
 	id: string;
@@ -7,7 +10,7 @@ export interface Address {
 	title: string; // Honorific (様, Mr./Ms., etc.)
 	note: string; // Memo (multi-line, permanent, date+content history format)
 	tempNote: string; // Temporary memo (searchable, easily deletable)
-	printType: string | null; // References printTypeOptions.id (nullable)
+	printType: LabelType | null; // Label format for printing
 	statusPerm: string | null; // References statusPermOptions.id (nullable)
 	statusNext: string | null; // References statusNextOptions.id (nullable)
 	createdAt: string;
@@ -40,8 +43,8 @@ export interface ReplyStatus {
 
 // Option item (extensible: order, visibility, custom label)
 export interface OptionItem {
-	id: string; // Stored value "printLabelJp" (camelCase, immutable)
-	label: string; // Display name (customizable) "Label J"
+	id: string; // Stored value (camelCase, immutable) e.g., "labelJp", "statusPermYes"
+	label: string; // Display name (customizable) e.g., "Label J"
 	order: number; // Sort order
 	active: boolean; // Enabled/disabled (hidden items preserve existing data)
 }
@@ -75,8 +78,8 @@ export const defaultOptions: AppOptions = {
 		{ id: "statusNextNo", label: "No", order: 2, active: true },
 	],
 	printTypeOptions: [
-		{ id: "printLabelJp", label: "Label J", order: 1, active: true },
-		{ id: "printLabelUs", label: "Label US", order: 2, active: true },
+		{ id: "labelJp", label: "Label J", order: 1, active: true },
+		{ id: "labelUs", label: "Label US", order: 2, active: true },
 	],
 	phoneTypeOptions: [
 		{ id: "phoneHome", label: "Home", order: 1, active: true },
@@ -115,7 +118,7 @@ export interface Settings {
 export const defaultSettings: Settings = {
 	locale: "ja",
 	theme: "system",
-	defaultPrintTemplate: "printLabelJp",
+	defaultPrintTemplate: "labelJp",
 };
 
 // Print template (JSON exportable, customizable)
@@ -139,7 +142,7 @@ export interface PrintField {
 // Default templates
 export const defaultPrintTemplates: PrintTemplate[] = [
 	{
-		id: "printLabelJp",
+		id: "labelJp",
 		name: "Label J",
 		width: "7cm",
 		height: "2cm",
@@ -152,7 +155,7 @@ export const defaultPrintTemplates: PrintTemplate[] = [
 		countryLabel: "JAPAN",
 	},
 	{
-		id: "printLabelUs",
+		id: "labelUs",
 		name: "Label US",
 		width: "6cm",
 		height: "2cm",
