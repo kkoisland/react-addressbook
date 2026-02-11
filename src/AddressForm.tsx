@@ -11,6 +11,9 @@ interface AddressFormProps {
 	onSave: (address: Omit<Address, "id" | "createdAt" | "updatedAt">) => void;
 	onUpdate: (id: string, updates: Partial<Address>) => void;
 	onCancel: () => void;
+	onClear: () => void;
+	onDuplicate?: () => void;
+	onDelete?: () => void;
 }
 
 const emptyAddress = {
@@ -33,6 +36,9 @@ const AddressForm = ({
 	onSave,
 	onUpdate,
 	onCancel,
+	onClear,
+	onDuplicate,
+	onDelete,
 }: AddressFormProps) => {
 	const [formData, setFormData] = useState(emptyAddress);
 	const [previewLabelType, setPreviewLabelType] =
@@ -86,16 +92,66 @@ const AddressForm = ({
 				<div className="flex gap-2">
 					<button
 						type="button"
+						onClick={() => {
+							if (
+								address &&
+								onDelete &&
+								window.confirm(`Delete "${address.name}"?`)
+							) {
+								onDelete();
+							}
+						}}
+						disabled={!address}
+						className={`px-3 py-1 text-sm border rounded ${
+							address
+								? "border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/30"
+								: "opacity-30 cursor-not-allowed"
+						}`}
+					>
+						Delete
+					</button>
+					<button
+						type="button"
+						onClick={() => {
+							if (
+								address &&
+								onDuplicate &&
+								window.confirm(`Duplicate "${address.name}"?`)
+							) {
+								onDuplicate();
+							}
+						}}
+						disabled={!address}
+						className={`px-3 py-1 text-sm border rounded ${
+							address
+								? "hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+								: "opacity-30 cursor-not-allowed dark:border-gray-600"
+						}`}
+					>
+						Duplicate
+					</button>
+					<button
+						type="button"
 						onClick={onCancel}
 						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
 					>
 						Cancel
 					</button>
 					<button
+						type="button"
+						onClick={() => {
+							setFormData(emptyAddress);
+							onClear();
+						}}
+						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+					>
+						Clear
+					</button>
+					<button
 						type="submit"
 						className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
 					>
-						Save
+						{address ? "Update" : "Save"}
 					</button>
 				</div>
 			</div>

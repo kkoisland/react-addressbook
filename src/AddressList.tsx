@@ -71,10 +71,11 @@ const AddressList = ({
 		[addresses],
 	);
 
-	// Notify parent of mode changes (print mode or search mode)
+	// Notify parent of mode changes (editing, print mode, or search mode)
+	const isEditing = isCreating || !!selectedAddress;
 	useEffect(() => {
-		onModeChange?.(isSearchMode || isPrintMode);
-	}, [isSearchMode, isPrintMode, onModeChange]);
+		onModeChange?.(isEditing || isSearchMode || isPrintMode);
+	}, [isEditing, isSearchMode, isPrintMode, onModeChange]);
 
 	// Enter print mode when requested by parent (e.g., header Print button)
 	useEffect(() => {
@@ -170,6 +171,18 @@ const AddressList = ({
 		if (selectedId === id) {
 			setSelectedId(null);
 		}
+	};
+
+	const handleDuplicate = () => {
+		if (!selectedAddress) return;
+		const { id, createdAt, updatedAt, ...data } = selectedAddress;
+		const newAddress = addAddress(data);
+		setSelectedId(newAddress.id);
+	};
+
+	const handleClear = () => {
+		setSelectedId(null);
+		setIsCreating(true);
 	};
 
 	const handleCancel = () => {
@@ -272,23 +285,25 @@ const AddressList = ({
 						</button>
 					</>
 				) : (
-					<>
-						<button
-							type="button"
-							onClick={handleNewAddress}
-							className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
-						>
-							+ New
-						</button>
-						<button
-							type="button"
-							onClick={handleFind}
-							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-							title="Cmd+F"
-						>
-							🔍 Find
-						</button>
-					</>
+					!isCreating &&
+					!selectedAddress && (
+						<>
+							<button
+								type="button"
+								onClick={handleNewAddress}
+								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+							>
+								+ New
+							</button>
+							<button
+								type="button"
+								onClick={handleFind}
+								className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+							>
+								🔍 Find
+							</button>
+						</>
+					)
 				)}
 			</div>
 
@@ -357,6 +372,16 @@ const AddressList = ({
 							onSave={handleSave}
 							onUpdate={handleUpdate}
 							onCancel={handleCancel}
+							onClear={handleClear}
+							onDuplicate={selectedAddress ? handleDuplicate : undefined}
+							onDelete={
+								selectedAddress
+									? () => {
+											handleDelete(selectedAddress.id);
+											setIsCreating(true);
+										}
+									: undefined
+							}
 						/>
 					) : (
 						<div className="flex items-center justify-center h-full text-gray-500">
