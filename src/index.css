@@ -6,3 +6,49 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
+/* Print styles for Brother DK-1209 labels (63.5mm × 38.1mm) */
+@page {
+	size: 63.5mm 38.1mm;
+	margin: 0;
+}
+
+@media print {
+	/* Hide screen-only elements */
+	.print-hide {
+		display: none !important;
+	}
+
+	/* Show print-only elements */
+	.print-show {
+		display: block !important;
+	}
+
+	/* Remove layout constraints for printing */
+	body,
+	#root,
+	#root > * {
+		height: auto !important;
+		overflow: visible !important;
+		padding: 0 !important;
+		background: white !important;
+		color: black !important;
+	}
+
+	/* Label styles */
+	.print-label {
+		page-break-after: always;
+		border: none !important;
+		width: 63.5mm !important;
+		height: 38.1mm !important;
+		padding: 2mm !important;
+		margin: 0 !important;
+		background: white !important;
+		color: black !important;
+	}
+
+	/* Remove last page break */
+	.print-label:last-child {
+		page-break-after: avoid;
+	}
+}

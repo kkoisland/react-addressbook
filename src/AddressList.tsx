@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
 import AddressSearchPanel from "./AddressSearchPanel";
-import type { Address } from "./types";
+import type { Address, LabelType } from "./types";
 import { type SearchField, useFilter } from "./useFilter";
 
 const searchFieldOptions: { value: SearchField; label: string }[] = [
@@ -21,6 +21,9 @@ interface AddressListProps {
 	) => Address;
 	updateAddress: (id: string, updates: Partial<Address>) => void;
 	deleteAddress: (id: string) => void;
+	onPrint?: (addresses: Address[]) => void;
+	onModeChange?: (active: boolean) => void;
+	requestPrintMode?: boolean;
 }
 
 const AddressList = ({
@@ -28,6 +31,9 @@ const AddressList = ({
 	addAddress,
 	updateAddress,
 	deleteAddress,
+	onPrint,
+	onModeChange,
+	requestPrintMode,
 }: AddressListProps) => {
 	const {
 		searchQuery,
@@ -46,36 +52,63 @@ const AddressList = ({
 
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [isCreating, setIsCreating] = useState(false);
+	const [isPrintMode, setIsPrintMode] = useState(false);
 
 	const selectedAddress = selectedId
 		? filteredAddresses.find((a) => a.id === selectedId) || null
 		: null;
 
-	// Keyboard shortcuts
+	// Quick print counts
+	const printQuickCounts = useMemo(
+		() => ({
+			labelJp: addresses.filter(
+				(a) => a.printType === "labelJp" && a.statusPerm === "statusPermYes",
+			).length,
+			labelUs: addresses.filter(
+				(a) => a.printType === "labelUs" && a.statusPerm === "statusPermYes",
+			).length,
+		}),
+		[addresses],
+	);
+
+	// Notify parent of mode changes (print mode or search mode)
+	useEffect(() => {
+		onModeChange?.(isSearchMode || isPrintMode);
+	}, [isSearchMode, isPrintMode, onModeChange]);
+
+	// Enter print mode when requested by parent (e.g., header Print button)
+	useEffect(() => {
+		if (requestPrintMode && !isPrintMode && !isSearchMode) {
+			setIsPrintMode(true);
+			setIsCreating(false);
+			setSelectedId(null);
+		}
+	}, [requestPrintMode, isPrintMode, isSearchMode]);
+
+	// Esc to exit search mode or print mode
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			// Cmd+F or Ctrl+F to enter search mode
-			if ((e.metaKey || e.ctrlKey) && e.key === "f") {
-				e.preventDefault();
-				enterSearchMode();
-				setIsCreating(false);
-				setSelectedId(null);
-			}
-			// Esc to exit search mode
-			if (e.key === "Escape" && isSearchMode) {
-				exitSearchMode();
+			if (e.key === "Escape") {
+				if (isSearchMode) {
+					exitSearchMode();
+				} else if (isPrintMode) {
+					setIsPrintMode(false);
+				}
 			}
 		};
 
 		document.addEventListener("keydown", handleKeyDown);
 		return () => document.removeEventListener("keydown", handleKeyDown);
-	}, [isSearchMode, enterSearchMode, exitSearchMode]);
+	}, [isSearchMode, isPrintMode, exitSearchMode]);
 
 	const handleSelect = (id: string) => {
 		setSelectedId(id);
 		setIsCreating(false);
 		if (isSearchMode) {
 			exitSearchMode();
+		}
+		if (isPrintMode) {
+			setIsPrintMode(false);
 		}
 	};
 
@@ -85,16 +118,39 @@ const AddressList = ({
 		if (isSearchMode) {
 			exitSearchMode();
 		}
+		if (isPrintMode) {
+			setIsPrintMode(false);
+		}
 	};
 
 	const handleFind = () => {
 		enterSearchMode();
+		setIsPrintMode(false);
 		setIsCreating(false);
 		setSelectedId(null);
 	};
 
 	const handleCloseFind = () => {
 		exitSearchMode();
+	};
+
+	const handleClosePrint = () => {
+		setIsPrintMode(false);
+	};
+
+	const handleQuickPrint = (labelType: LabelType) => {
+		if (!onPrint) return;
+		const filtered = addresses.filter(
+			(a) => a.printType === labelType && a.statusPerm === "statusPermYes",
+		);
+		onPrint(filtered);
+	};
+
+	const handleCustomPrint = () => {
+		setIsPrintMode(false);
+		enterSearchMode();
+		setIsCreating(false);
+		setSelectedId(null);
 	};
 
 	const handleSave = (
@@ -128,9 +184,9 @@ const AddressList = ({
 				<select
 					value={searchField}
 					onChange={(e) => setSearchField(e.target.value as SearchField)}
-					className={`px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode ? "opacity-50 cursor-not-allowed" : ""}`}
+					className={`px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode || isPrintMode ? "opacity-50 cursor-not-allowed" : ""}`}
 					aria-label="Search field"
-					disabled={isSearchMode}
+					disabled={isSearchMode || isPrintMode}
 				>
 					{searchFieldOptions.map((opt) => (
 						<option key={opt.value} value={opt.value}>
@@ -144,16 +200,16 @@ const AddressList = ({
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 						placeholder={isSearchMode ? "Use search panel →" : "Search..."}
-						className={`w-full pl-8 pr-8 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode ? "opacity-50 cursor-not-allowed" : ""}`}
+						className={`w-full pl-8 pr-8 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode || isPrintMode ? "opacity-50 cursor-not-allowed" : ""}`}
 						aria-label="Search query"
-						disabled={isSearchMode}
+						disabled={isSearchMode || isPrintMode}
 					/>
 					<span
-						className={`absolute left-2 top-1/2 -translate-y-1/2 ${isSearchMode ? "text-gray-300 dark:text-gray-600" : "text-gray-400"}`}
+						className={`absolute left-2 top-1/2 -translate-y-1/2 ${isSearchMode || isPrintMode ? "text-gray-300 dark:text-gray-600" : "text-gray-400"}`}
 					>
 						🔍
 					</span>
-					{searchQuery && !isSearchMode && (
+					{searchQuery && !isSearchMode && !isPrintMode && (
 						<button
 							type="button"
 							onClick={() => setSearchQuery("")}
@@ -165,14 +221,56 @@ const AddressList = ({
 					)}
 				</div>
 				<div className="flex-1" />
-				{isSearchMode ? (
-					<button
-						type="button"
-						onClick={handleCloseFind}
-						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-					>
-						✕ Close Find
-					</button>
+				{isPrintMode ? (
+					<>
+						<button
+							type="button"
+							onClick={() => handleQuickPrint("labelJp")}
+							className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+						>
+							Label J ({printQuickCounts.labelJp})
+						</button>
+						<button
+							type="button"
+							onClick={() => handleQuickPrint("labelUs")}
+							className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+						>
+							Label US ({printQuickCounts.labelUs})
+						</button>
+						<button
+							type="button"
+							onClick={handleCustomPrint}
+							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+						>
+							Custom
+						</button>
+						<button
+							type="button"
+							onClick={handleClosePrint}
+							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+						>
+							✕
+						</button>
+					</>
+				) : isSearchMode ? (
+					<>
+						{onPrint && (
+							<button
+								type="button"
+								onClick={() => onPrint(filteredAddresses)}
+								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+							>
+								🖨️ Print Preview ({filteredAddresses.length})
+							</button>
+						)}
+						<button
+							type="button"
+							onClick={handleCloseFind}
+							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+						>
+							✕ Close Find
+						</button>
+					</>
 				) : (
 					<>
 						<button

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Address } from "./types";
 import { importData } from "./utilsCsv";
 
@@ -27,6 +27,16 @@ const ImportPage = ({
 	existingCount,
 	addresses,
 }: ImportPageProps) => {
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				onBack();
+			}
+		};
+		document.addEventListener("keydown", handleKeyDown);
+		return () => document.removeEventListener("keydown", handleKeyDown);
+	}, [onBack]);
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState<{
 		success: boolean;
