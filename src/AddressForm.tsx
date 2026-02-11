@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AddressFormEmail from "./AddressFormEmail";
 import AddressFormPhone from "./AddressFormPhone";
 import AddressFormReplyStatus from "./AddressFormReplyStatus";
+import PrintLabel from "./PrintLabel";
 import type { Address, Email, LabelType, Phone, ReplyStatus } from "./types";
 import { defaultOptions } from "./types";
 
@@ -34,6 +35,9 @@ const AddressForm = ({
 	onCancel,
 }: AddressFormProps) => {
 	const [formData, setFormData] = useState(emptyAddress);
+	const [previewLabelType, setPreviewLabelType] =
+		useState<LabelType>("labelJp");
+	const [showCountryLabel, setShowCountryLabel] = useState(false);
 
 	useEffect(() => {
 		if (address) {
@@ -267,6 +271,69 @@ const AddressForm = ({
 						/>
 					</label>
 				</div>
+			</div>
+
+			{/* Label Preview */}
+			<div className="border-t pt-4 dark:border-gray-700">
+				<div className="flex items-center gap-4 mb-2">
+					<span className="text-sm font-medium">Label Preview:</span>
+					<div className="flex gap-1">
+						<button
+							type="button"
+							onClick={() => setPreviewLabelType("labelJp")}
+							className={`px-2 py-1 text-xs rounded ${
+								previewLabelType === "labelJp"
+									? "bg-indigo-600 text-white"
+									: "border dark:border-gray-600"
+							}`}
+						>
+							Label J
+						</button>
+						<button
+							type="button"
+							onClick={() => setPreviewLabelType("labelUs")}
+							className={`px-2 py-1 text-xs rounded ${
+								previewLabelType === "labelUs"
+									? "bg-indigo-600 text-white"
+									: "border dark:border-gray-600"
+							}`}
+						>
+							Label US
+						</button>
+					</div>
+					{previewLabelType === "labelJp" && (
+						<label className="flex items-center gap-1 text-sm">
+							<input
+								type="checkbox"
+								checked={showCountryLabel}
+								onChange={(e) => setShowCountryLabel(e.target.checked)}
+								className="w-3 h-3"
+							/>
+							JAPAN
+						</label>
+					)}
+				</div>
+				<PrintLabel
+					address={{
+						id: "preview",
+						name: formData.name,
+						title: formData.title,
+						postalCodeJP: formData.postalCodeJP,
+						address: formData.address,
+						printType: previewLabelType,
+						note: "",
+						tempNote: "",
+						statusPerm: null,
+						statusNext: null,
+						phones: [],
+						emails: [],
+						replyStatuses: [],
+						createdAt: "",
+						updatedAt: "",
+					}}
+					labelType={previewLabelType}
+					showCountryLabel={showCountryLabel && previewLabelType === "labelJp"}
+				/>
 			</div>
 		</form>
 	);
