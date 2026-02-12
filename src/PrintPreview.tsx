@@ -104,7 +104,7 @@ const PrintPreview = ({ addresses, onBack }: PrintPreviewProps) => {
 						onClick={onBack}
 						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
 					>
-						Back
+						✕ Back
 					</button>
 					<button
 						type="button"

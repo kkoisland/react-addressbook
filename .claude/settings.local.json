@@ -6,6 +6,7 @@
 			"Bash(head:*)",
 			"Bash(python3:*)",
 			"Bash(pnpm build:*)"
-		]
+		],
+		"deny": ["EnterPlanMode"]
 	}
 }

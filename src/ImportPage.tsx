@@ -137,7 +137,7 @@ const ImportPage = ({
 			<div className="flex justify-between items-center border-b pb-4 dark:border-gray-700">
 				<h2 className="text-xl font-semibold">Data Management</h2>
 				<button type="button" onClick={onBack} className={buttonStyle}>
-					← Back to List
+					✕ Back
 				</button>
 			</div>
 

@@ -125,7 +125,6 @@ function App() {
 						onBack={() => {
 							setPrintAddresses([]);
 							setCurrentPage("list");
-							setRequestPrintMode(true);
 						}}
 					/>
 				)}
