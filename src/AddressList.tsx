@@ -108,9 +108,6 @@ const AddressList = ({
 		if (isSearchMode) {
 			exitSearchMode();
 		}
-		if (isPrintMode) {
-			setIsPrintMode(false);
-		}
 	};
 
 	const handleNewAddress = () => {
@@ -148,7 +145,6 @@ const AddressList = ({
 	};
 
 	const handleCustomPrint = () => {
-		setIsPrintMode(false);
 		enterSearchMode();
 		setIsCreating(false);
 		setSelectedId(null);
@@ -257,6 +253,15 @@ const AddressList = ({
 						>
 							Custom
 						</button>
+						{selectedAddress && onPrint && (
+							<button
+								type="button"
+								onClick={() => onPrint([selectedAddress])}
+								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+							>
+								🖨️ Print Preview (1)
+							</button>
+						)}
 						<button
 							type="button"
 							onClick={handleClosePrint}
