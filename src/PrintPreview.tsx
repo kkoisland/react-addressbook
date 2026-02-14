@@ -99,18 +99,10 @@ const PrintPreview = ({ addresses, onBack }: PrintPreviewProps) => {
 			<div className="print-hide flex justify-between items-center border-b pb-4 mb-4 dark:border-gray-700">
 				<h2 className="text-lg font-semibold">Print Preview</h2>
 				<div className="flex gap-2">
-					<button
-						type="button"
-						onClick={onBack}
-						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-					>
+					<button type="button" onClick={onBack} className="btn-secondary">
 						✕ Back
 					</button>
-					<button
-						type="button"
-						onClick={handlePrint}
-						className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
-					>
+					<button type="button" onClick={handlePrint} className="btn-primary">
 						Print ({printableAddresses.length})
 					</button>
 				</div>
@@ -136,7 +128,7 @@ const PrintPreview = ({ addresses, onBack }: PrintPreviewProps) => {
 					<select
 						value={mixedLabelType}
 						onChange={(e) => setMixedLabelType(e.target.value as LabelType)}
-						className="px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="input-base text-sm"
 					>
 						<option value="labelJp">Label J</option>
 						<option value="labelUs">Label US</option>

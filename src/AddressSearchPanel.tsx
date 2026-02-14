@@ -54,11 +54,7 @@ const AddressSearchPanel = ({
 		>
 			<div className="flex justify-between items-center border-b pb-2 dark:border-gray-700">
 				<h2 className="text-lg font-semibold">Search</h2>
-				<button
-					type="button"
-					onClick={onClear}
-					className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-				>
+				<button type="button" onClick={onClear} className="btn-secondary">
 					Clear
 				</button>
 			</div>
@@ -74,7 +70,7 @@ const AddressSearchPanel = ({
 							value={filters.name}
 							onChange={(e) => updateFilter("name", e.target.value)}
 							placeholder="Search name... (== for empty)"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 							autoComplete="one-time-code"
 						/>
 					</label>
@@ -87,7 +83,7 @@ const AddressSearchPanel = ({
 							value={filters.title}
 							onChange={(e) => updateFilter("title", e.target.value)}
 							placeholder="Search title... (== for empty)"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 							autoComplete="one-time-code"
 						/>
 					</label>
@@ -102,7 +98,7 @@ const AddressSearchPanel = ({
 							value={filters.postalCodeJP}
 							onChange={(e) => updateFilter("postalCodeJP", e.target.value)}
 							placeholder="Search postal code... (== for empty)"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 							autoComplete="one-time-code"
 						/>
 					</label>
@@ -115,7 +111,7 @@ const AddressSearchPanel = ({
 							value={filters.address}
 							onChange={(e) => updateFilter("address", e.target.value)}
 							placeholder="Search address... (== for empty)"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 							autoComplete="one-time-code"
 						/>
 					</label>
@@ -128,7 +124,7 @@ const AddressSearchPanel = ({
 								onChange={(e) =>
 									updateFilter("printType", e.target.value || null)
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">All</option>
 								<option value={EMPTY_VALUE}>Empty</option>
@@ -149,7 +145,7 @@ const AddressSearchPanel = ({
 								onChange={(e) =>
 									updateFilter("statusPerm", e.target.value || null)
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">All</option>
 								<option value={EMPTY_VALUE}>Empty</option>
@@ -170,7 +166,7 @@ const AddressSearchPanel = ({
 								onChange={(e) =>
 									updateFilter("statusNext", e.target.value || null)
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">All</option>
 								<option value={EMPTY_VALUE}>Empty</option>
@@ -196,7 +192,7 @@ const AddressSearchPanel = ({
 							onChange={(e) => updateFilter("phone", e.target.value)}
 							placeholder="Search phone... (== for empty)"
 							aria-label="Phone number"
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 							autoComplete="one-time-code"
 						/>
 					</div>
@@ -211,7 +207,7 @@ const AddressSearchPanel = ({
 							onChange={(e) => updateFilter("email", e.target.value)}
 							placeholder="Search email... (== for empty)"
 							aria-label="Email address"
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 							autoComplete="one-time-code"
 						/>
 					</div>
@@ -224,7 +220,7 @@ const AddressSearchPanel = ({
 								value={filters.replyYear}
 								onChange={(e) => updateFilter("replyYear", e.target.value)}
 								aria-label="Reply year"
-								className="flex-1 px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="flex-1 input-base text-sm"
 							>
 								<option value="">All Years</option>
 								<option value="==">Empty</option>
@@ -240,7 +236,7 @@ const AddressSearchPanel = ({
 									updateFilter("replyType", e.target.value || null)
 								}
 								aria-label="Reply type"
-								className="px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="input-base text-sm"
 							>
 								<option value="">All Types</option>
 								<option value={EMPTY_VALUE}>Empty</option>
@@ -261,7 +257,7 @@ const AddressSearchPanel = ({
 							value={filters.note}
 							onChange={(e) => updateFilter("note", e.target.value)}
 							placeholder="Search in notes... (== for empty)"
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 							autoComplete="one-time-code"
 						/>
 					</label>
@@ -274,7 +270,7 @@ const AddressSearchPanel = ({
 							value={filters.tempNote}
 							onChange={(e) => updateFilter("tempNote", e.target.value)}
 							placeholder="Search in temp notes... (== for empty)"
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 							autoComplete="one-time-code"
 						/>
 					</label>

@@ -130,11 +130,7 @@ const AddressForm = ({
 					>
 						Duplicate
 					</button>
-					<button
-						type="button"
-						onClick={onCancel}
-						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-					>
+					<button type="button" onClick={onCancel} className="btn-secondary">
 						Cancel
 					</button>
 					<button
@@ -143,14 +139,11 @@ const AddressForm = ({
 							setFormData(emptyAddress);
 							onClear();
 						}}
-						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+						className="btn-secondary"
 					>
 						Clear
 					</button>
-					<button
-						type="submit"
-						className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
-					>
+					<button type="submit" className="btn-primary">
 						{address ? "Update" : "Save"}
 					</button>
 				</div>
@@ -167,7 +160,7 @@ const AddressForm = ({
 							onChange={(e) =>
 								setFormData({ ...formData, name: e.target.value })
 							}
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 							required
 						/>
 					</label>
@@ -181,7 +174,7 @@ const AddressForm = ({
 								setFormData({ ...formData, title: e.target.value })
 							}
 							placeholder="様, Mr., Ms."
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 						/>
 					</label>
 
@@ -196,7 +189,7 @@ const AddressForm = ({
 								setFormData({ ...formData, postalCodeJP: e.target.value })
 							}
 							placeholder="123-4567"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 						/>
 					</label>
 
@@ -208,7 +201,7 @@ const AddressForm = ({
 								setFormData({ ...formData, address: e.target.value })
 							}
 							rows={2}
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 						/>
 					</label>
 
@@ -223,7 +216,7 @@ const AddressForm = ({
 										printType: (e.target.value || null) as LabelType | null,
 									})
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">-</option>
 								{printTypes.map((t) => (
@@ -246,7 +239,7 @@ const AddressForm = ({
 										statusPerm: e.target.value || null,
 									})
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">-</option>
 								{statusPermOptions.map((t) => (
@@ -269,7 +262,7 @@ const AddressForm = ({
 										statusNext: e.target.value || null,
 									})
 								}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="">-</option>
 								{statusNextOptions.map((t) => (
@@ -310,7 +303,7 @@ const AddressForm = ({
 							}
 							rows={3}
 							placeholder="Permanent notes..."
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 						/>
 					</label>
 
@@ -323,7 +316,7 @@ const AddressForm = ({
 								setFormData({ ...formData, tempNote: e.target.value })
 							}
 							placeholder="Temporary note..."
-							className="w-full px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base text-sm"
 						/>
 					</label>
 				</div>

@@ -42,18 +42,10 @@ const SenderPrintPreview = ({ onBack }: SenderPrintPreviewProps) => {
 			<div className="print-hide flex justify-between items-center border-b pb-4 mb-4 dark:border-gray-700">
 				<h2 className="text-lg font-semibold">Sender Label</h2>
 				<div className="flex gap-2">
-					<button
-						type="button"
-						onClick={onBack}
-						className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
-					>
+					<button type="button" onClick={onBack} className="btn-secondary">
 						✕ Back
 					</button>
-					<button
-						type="button"
-						onClick={handlePrint}
-						className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
-					>
+					<button type="button" onClick={handlePrint} className="btn-primary">
 						Print
 					</button>
 				</div>
@@ -72,7 +64,7 @@ const SenderPrintPreview = ({ onBack }: SenderPrintPreviewProps) => {
 								setSenderInfo({ ...senderInfo, name: e.target.value })
 							}
 							placeholder="Your name"
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 						/>
 					</label>
 
@@ -85,7 +77,7 @@ const SenderPrintPreview = ({ onBack }: SenderPrintPreviewProps) => {
 							}
 							placeholder="Your address"
 							rows={4}
-							className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+							className="w-full input-base"
 						/>
 					</label>
 
@@ -95,7 +87,7 @@ const SenderPrintPreview = ({ onBack }: SenderPrintPreviewProps) => {
 							<select
 								value={labelType}
 								onChange={(e) => setLabelType(e.target.value as LabelType)}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							>
 								<option value="labelJp">Label J</option>
 								<option value="labelUs">Label US</option>
@@ -114,7 +106,7 @@ const SenderPrintPreview = ({ onBack }: SenderPrintPreviewProps) => {
 								}
 								min={1}
 								max={100}
-								className="w-full px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600"
+								className="w-full input-base"
 							/>
 						</label>
 					</div>

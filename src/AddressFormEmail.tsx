@@ -42,7 +42,7 @@ const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 					<select
 						value={email.type}
 						onChange={(e) => updateEmail(email.id, "type", e.target.value)}
-						className="px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="input-base text-sm"
 						aria-label="Email type"
 					>
 						{emailTypes.map((t) => (
@@ -57,7 +57,7 @@ const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 						onChange={(e) => updateEmail(email.id, "address", e.target.value)}
 						placeholder="Email address"
 						aria-label="Email address"
-						className="flex-1 px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="flex-1 input-base text-sm"
 					/>
 					<button
 						type="button"

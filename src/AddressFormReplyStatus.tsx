@@ -57,7 +57,7 @@ const AddressFormReplyStatus = ({
 						}
 						placeholder="Year"
 						aria-label="Year"
-						className="w-20 px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="w-20 input-base text-sm"
 					/>
 					<select
 						value={reply.type || ""}
@@ -65,7 +65,7 @@ const AddressFormReplyStatus = ({
 							updateReplyStatus(reply.id, "type", e.target.value || null)
 						}
 						aria-label="Reply type"
-						className="flex-1 px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="flex-1 input-base text-sm"
 					>
 						<option value="">-</option>
 						{replyTypes.map((t) => (
