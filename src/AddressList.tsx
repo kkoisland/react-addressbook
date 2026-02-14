@@ -193,7 +193,7 @@ const AddressList = ({
 				<select
 					value={searchField}
 					onChange={(e) => setSearchField(e.target.value as SearchField)}
-					className={`px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode || isPrintMode ? "opacity-50 cursor-not-allowed" : ""}`}
+					className={`input-base text-sm ${isSearchMode || isPrintMode ? "opacity-50 cursor-not-allowed" : ""}`}
 					aria-label="Search field"
 					disabled={isSearchMode || isPrintMode}
 				>
@@ -235,21 +235,21 @@ const AddressList = ({
 						<button
 							type="button"
 							onClick={() => handleQuickPrint("labelJp")}
-							className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+							className="btn-primary"
 						>
 							Label J ({printQuickCounts.labelJp})
 						</button>
 						<button
 							type="button"
 							onClick={() => handleQuickPrint("labelUs")}
-							className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+							className="btn-primary"
 						>
 							Label US ({printQuickCounts.labelUs})
 						</button>
 						<button
 							type="button"
 							onClick={handleCustomPrint}
-							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+							className="btn-secondary"
 						>
 							Custom
 						</button>
@@ -257,7 +257,7 @@ const AddressList = ({
 							<button
 								type="button"
 								onClick={() => onPrint([selectedAddress])}
-								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+								className="btn-primary"
 							>
 								🖨️ Print Preview (1)
 							</button>
@@ -265,7 +265,7 @@ const AddressList = ({
 						<button
 							type="button"
 							onClick={handleClosePrint}
-							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+							className="btn-secondary"
 						>
 							✕
 						</button>
@@ -276,7 +276,7 @@ const AddressList = ({
 							<button
 								type="button"
 								onClick={() => onPrint(filteredAddresses)}
-								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+								className="btn-primary"
 							>
 								🖨️ Print Preview ({filteredAddresses.length})
 							</button>
@@ -284,7 +284,7 @@ const AddressList = ({
 						<button
 							type="button"
 							onClick={handleCloseFind}
-							className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+							className="btn-secondary"
 						>
 							✕
 						</button>
@@ -296,14 +296,14 @@ const AddressList = ({
 							<button
 								type="button"
 								onClick={handleNewAddress}
-								className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+								className="btn-primary"
 							>
 								+ New
 							</button>
 							<button
 								type="button"
 								onClick={handleFind}
-								className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+								className="btn-secondary"
 							>
 								🔍 Find
 							</button>

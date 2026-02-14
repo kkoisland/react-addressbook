@@ -42,7 +42,7 @@ const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 					<select
 						value={phone.type}
 						onChange={(e) => updatePhone(phone.id, "type", e.target.value)}
-						className="px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="input-base text-sm"
 						aria-label="Phone type"
 					>
 						{phoneTypes.map((t) => (
@@ -57,7 +57,7 @@ const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 						onChange={(e) => updatePhone(phone.id, "number", e.target.value)}
 						placeholder="Phone number"
 						aria-label="Phone number"
-						className="flex-1 px-2 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600"
+						className="flex-1 input-base text-sm"
 					/>
 					<button
 						type="button"

@@ -73,21 +73,21 @@ function App() {
 							<button
 								type="button"
 								onClick={() => setRequestPrintMode(true)}
-								className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+								className="btn-secondary"
 							>
 								🖨️ Print
 							</button>
 							<button
 								type="button"
 								onClick={() => setCurrentPage("print-sender")}
-								className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+								className="btn-secondary"
 							>
 								🏠 Sender
 							</button>
 							<button
 								type="button"
 								onClick={() => setCurrentPage("import")}
-								className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600"
+								className="btn-secondary"
 							>
 								📥 Import
 							</button>
