@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Phone } from "./types";
 import { defaultOptions } from "./types";
 import generateUuid from "./utilsUuid";
@@ -9,6 +10,7 @@ interface AddressFormPhoneProps {
 
 const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 	const phoneTypes = defaultOptions.phoneTypeOptions.filter((o) => o.active);
+	const [copiedId, setCopiedId] = useState<string | null>(null);
 
 	const addPhone = () => {
 		onChange([
@@ -23,6 +25,12 @@ const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 
 	const removePhone = (id: string) => {
 		onChange(phones.filter((p) => p.id !== id));
+	};
+
+	const handleCopy = (id: string, value: string) => {
+		navigator.clipboard.writeText(value);
+		setCopiedId(id);
+		setTimeout(() => setCopiedId(null), 1000);
 	};
 
 	return (
@@ -59,6 +67,16 @@ const AddressFormPhone = ({ phones, onChange }: AddressFormPhoneProps) => {
 						aria-label="Phone number"
 						className="flex-1 input-base text-sm"
 					/>
+					{phone.number && (
+						<button
+							type="button"
+							onClick={() => handleCopy(phone.id, phone.number)}
+							className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-sm cursor-pointer"
+							title="Copy"
+						>
+							{copiedId === phone.id ? "✓" : "📋"}
+						</button>
+					)}
 					<button
 						type="button"
 						onClick={() => removePhone(phone.id)}

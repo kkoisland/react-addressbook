@@ -5,7 +5,9 @@
 			"Bash(pnpm biome:fix:*)",
 			"Bash(head:*)",
 			"Bash(python3:*)",
-			"Bash(pnpm build:*)"
+			"Bash(pnpm build:*)",
+			"Bash(pnpm biome check:*)",
+			"Bash(pnpm biome format:*)"
 		],
 		"deny": ["EnterPlanMode"]
 	}

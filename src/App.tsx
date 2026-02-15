@@ -64,8 +64,8 @@ function App() {
 	};
 
 	return (
-		<div className="h-screen flex flex-col bg-white text-gray-800 dark:bg-slate-900 dark:text-slate-200 p-4">
-			<div className="print-hide flex justify-between items-center mb-4">
+		<div className="h-screen flex flex-col bg-white text-gray-800 dark:bg-slate-900 dark:text-slate-200 px-4 py-2">
+			<div className="print-hide flex justify-between items-center mb-4 pr-2">
 				<h1 className="text-2xl font-bold">Address Book</h1>
 				<div className="flex items-center gap-2">
 					{currentPage === "list" && !isModalMode && (
@@ -93,7 +93,7 @@ function App() {
 							</button>
 						</>
 					)}
-					<button type="button" onClick={toggleTheme} className="px-2 py-1">
+					<button type="button" onClick={toggleTheme} className="btn-secondary">
 						{isDarkMode ? "☀️" : "🌙"}
 					</button>
 				</div>
