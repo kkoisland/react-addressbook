@@ -208,7 +208,7 @@ const AddressList = ({
 						type="text"
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder={isSearchMode ? "Use search panel →" : "Search..."}
+						placeholder={isSearchMode ? "Use search panel →" : ""}
 						className={`w-full pl-8 pr-8 py-1 text-sm border rounded dark:bg-slate-800 dark:border-gray-600 ${isSearchMode || isPrintMode ? "opacity-50 cursor-not-allowed" : ""}`}
 						aria-label="Search query"
 						disabled={isSearchMode || isPrintMode}
@@ -229,6 +229,12 @@ const AddressList = ({
 						</button>
 					)}
 				</div>
+				<span
+					className="text-gray-400 dark:text-gray-500 cursor-help"
+					title="Quick search: Name, Address, Postal Code, Note, Temp Note, Phone, Email. Dropdowns (Print Type, Status) are not searched."
+				>
+					ℹ️
+				</span>
 				<div className="flex-1" />
 				{isPrintMode ? (
 					<>
@@ -313,7 +319,7 @@ const AddressList = ({
 			</div>
 
 			{/* Main content */}
-			<div className="flex gap-4 flex-1 min-h-0">
+			<div className="flex gap-6 flex-1 min-h-0">
 				{/* Left: Table list */}
 				<div className="w-1/2 flex flex-col">
 					<div className="mb-2">
@@ -322,15 +328,13 @@ const AddressList = ({
 						</span>
 					</div>
 
-					<div className="flex-1 overflow-auto border rounded dark:border-gray-700">
+					<div className="flex-1 overflow-auto scrollbar-hidden border rounded dark:border-gray-700">
 						<table className="w-full text-sm">
 							<thead className="bg-gray-50 dark:bg-slate-800 sticky top-0">
 								<tr>
 									<th className="px-3 py-2 text-left font-medium">Name</th>
 									<th className="px-3 py-2 text-left font-medium">Address</th>
 									<th className="px-3 py-2 text-left font-medium">Status</th>
-									<th className="px-3 py-2 text-left font-medium">Reply</th>
-									<th className="px-3 py-2 text-left font-medium" />
 								</tr>
 							</thead>
 							<tbody>
@@ -340,13 +344,12 @@ const AddressList = ({
 										address={address}
 										isSelected={address.id === selectedId}
 										onSelect={handleSelect}
-										onDelete={handleDelete}
 									/>
 								))}
 								{filteredAddresses.length === 0 && (
 									<tr>
 										<td
-											colSpan={5}
+											colSpan={3}
 											className="px-3 py-8 text-center text-gray-500"
 										>
 											{isSearchMode && !hasFilters

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Email } from "./types";
 import { defaultOptions } from "./types";
 import generateUuid from "./utilsUuid";
@@ -9,6 +10,7 @@ interface AddressFormEmailProps {
 
 const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 	const emailTypes = defaultOptions.emailTypeOptions.filter((o) => o.active);
+	const [copiedId, setCopiedId] = useState<string | null>(null);
 
 	const addEmail = () => {
 		onChange([
@@ -23,6 +25,12 @@ const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 
 	const removeEmail = (id: string) => {
 		onChange(emails.filter((e) => e.id !== id));
+	};
+
+	const handleCopy = (id: string, value: string) => {
+		navigator.clipboard.writeText(value);
+		setCopiedId(id);
+		setTimeout(() => setCopiedId(null), 1000);
 	};
 
 	return (
@@ -59,6 +67,16 @@ const AddressFormEmail = ({ emails, onChange }: AddressFormEmailProps) => {
 						aria-label="Email address"
 						className="flex-1 input-base text-sm"
 					/>
+					{email.address && (
+						<button
+							type="button"
+							onClick={() => handleCopy(email.id, email.address)}
+							className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-sm cursor-pointer"
+							title="Copy"
+						>
+							{copiedId === email.id ? "✓" : "📋"}
+						</button>
+					)}
 					<button
 						type="button"
 						onClick={() => removeEmail(email.id)}

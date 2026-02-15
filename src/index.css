@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
 /* Common form styles */
 .input-base {
 	@apply px-2 py-1 border rounded dark:bg-slate-800 dark:border-gray-600;
@@ -17,7 +11,11 @@
 }
 
 .btn-secondary {
-	@apply px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600;
+	@apply px-3 py-1 text-sm rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-gray-600;
+}
+
+.scrollbar-hidden {
+	scrollbar-width: none;
 }
 
 /* Print styles for Brother DK-1209 labels (63.5mm × 38.1mm) */
