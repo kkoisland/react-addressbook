@@ -103,6 +103,7 @@ export const setupLocalStorage = async (
 		{ key: STORAGE_KEY, data: addresses },
 	);
 	await page.reload();
+	await page.waitForLoadState("networkidle");
 };
 
 export const clearLocalStorage = async (page: Page): Promise<void> => {
