@@ -95,19 +95,18 @@ export const setupLocalStorage = async (
 	page: Page,
 	addresses: TestAddress[],
 ): Promise<void> => {
-	await page.goto("/");
-	await page.evaluate(
+	// Use addInitScript to set localStorage before React initializes
+	await page.addInitScript(
 		({ key, data }) => {
 			localStorage.setItem(key, JSON.stringify(data));
 		},
 		{ key: STORAGE_KEY, data: addresses },
 	);
-	await page.reload();
-	await page.waitForLoadState("networkidle");
+	await page.goto("/");
+	await page.locator("h1").waitFor({ state: "visible" });
 };
 
 export const clearLocalStorage = async (page: Page): Promise<void> => {
 	await page.goto("/");
 	await page.evaluate(() => localStorage.clear());
-	await page.reload();
 };
