@@ -1,5 +1,7 @@
 # React Address Book
 
+📊 For a visual overview of this project, see the [Speaker Deck presentation](https://speakerdeck.com/kkoisland/react-addressbook).
+
 A personal address book application built with React + TypeScript for managing contacts and printing mailing labels.
 
 ## Features
@@ -19,6 +21,12 @@ A personal address book application built with React + TypeScript for managing c
 - Tailwind CSS v4
 - Biome (Formatter & Linter)
 - localStorage for data persistence
+
+## Resources
+
+🚀 **Live Demo**: https://www.kkoisland.com/react-addressbook/
+
+📝 **Slides**: [Google Slides](https://docs.google.com/presentation/d/1tO9qYSCKY4RH4LRjyMLPHxCnSFrTuc64ZFn_Tc7rRk4/preview) — Same content as the Speaker Deck presentation, for those who cannot access Speaker Deck.
 
 ## Getting Started
 
