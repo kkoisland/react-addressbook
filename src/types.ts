@@ -84,6 +84,7 @@ export const defaultOptions: AppOptions = {
 			order: 5,
 			active: true,
 		},
+		{ id: "statusNextOther", label: "その他", order: 6, active: true },
 	],
 	printTypeOptions: [
 		{ id: "labelJp", label: "Label J", order: 1, active: true },

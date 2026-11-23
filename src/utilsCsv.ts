@@ -90,6 +90,7 @@ function mapStatusNext(value: string): string | null {
 	if (v === "n(西山家)") return "statusNextNishiyama";
 	if (v === "h(樋口家)") return "statusNextHiguchi";
 	if (v === "not decided") return "statusNextNotDecided";
+	if (v === "その他") return "statusNextOther";
 	return null;
 }
 
