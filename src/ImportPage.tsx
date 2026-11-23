@@ -53,10 +53,12 @@ const ImportPage = ({
 		setResult(null);
 
 		try {
-			const mod = await import("./data/addresses.csv?raw").catch(() => {
-				throw new Error("addresses.csv not found in src/data/");
-			});
-			const importResult = importFromNewCsv(mod.default);
+			const response = await fetch("/data/addresses.csv");
+			if (!response.ok) {
+				throw new Error("addresses.csv not found in public/data/");
+			}
+			const content = await response.text();
+			const importResult = importFromNewCsv(content);
 
 			if (!importResult.success) {
 				setResult({
@@ -128,7 +130,7 @@ const ImportPage = ({
 						<li>addresses.csv (required)</li>
 					</ul>
 					<p className="mt-3 text-xs text-gray-500 dark:text-gray-400 border-t pt-2 dark:border-gray-700">
-						Note: Put your CSV file in public/data/addresses.csv.
+						Note: Put your CSV file at public/data/addresses.csv.
 					</p>
 				</div>
 
