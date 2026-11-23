@@ -76,6 +76,9 @@ export const defaultOptions: AppOptions = {
 	statusNextOptions: [
 		{ id: "statusNextYes", label: "Yes", order: 1, active: true },
 		{ id: "statusNextNo", label: "No", order: 2, active: true },
+		{ id: "statusNextNishiyama", label: "N(西山家)", order: 3, active: true },
+		{ id: "statusNextHiguchi", label: "H(樋口家)", order: 4, active: true },
+		{ id: "statusNextNotDecided", label: "Not Decided", order: 5, active: true },
 	],
 	printTypeOptions: [
 		{ id: "labelJp", label: "Label J", order: 1, active: true },

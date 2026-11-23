@@ -140,6 +140,9 @@ function mapStatusNext(value: string): string | null {
 	const v = value.toLowerCase().trim();
 	if (v === "yes" || v === "y") return "statusNextYes";
 	if (v === "no" || v === "n") return "statusNextNo";
+	if (v === "n(西山家)") return "statusNextNishiyama";
+	if (v === "h(樋口家)") return "statusNextHiguchi";
+	if (v === "not decided") return "statusNextNotDecided";
 	return null;
 }
 
