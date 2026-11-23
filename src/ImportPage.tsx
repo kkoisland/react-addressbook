@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Address } from "./types";
-import { importData } from "./utilsCsv";
+import { importFromNewCsv } from "./utilsCsv";
 
 interface ImportPageProps {
 	onImport: (addresses: Address[]) => void;
@@ -9,13 +9,6 @@ interface ImportPageProps {
 	existingCount: number;
 	addresses: Address[];
 }
-
-const IMPORT_FILES = {
-	addresses: "/import-data/addresses.csv",
-	phones: "/import-data/phones.csv",
-	emails: "/import-data/emails.csv",
-	reply: "/import-data/reply_status.csv",
-};
 
 const buttonStyle =
 	"btn-secondary px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed";
@@ -60,31 +53,10 @@ const ImportPage = ({
 		setResult(null);
 
 		try {
-			const [addressesRes, phonesRes, emailsRes, replyRes] = await Promise.all([
-				fetch(IMPORT_FILES.addresses),
-				fetch(IMPORT_FILES.phones),
-				fetch(IMPORT_FILES.emails),
-				fetch(IMPORT_FILES.reply),
-			]);
-
-			if (!addressesRes.ok) {
-				throw new Error(`Failed to load addresses.csv: ${addressesRes.status}`);
-			}
-
-			const [addressesContent, phonesContent, emailsContent, replyContent] =
-				await Promise.all([
-					addressesRes.text(),
-					phonesRes.ok ? phonesRes.text() : null,
-					emailsRes.ok ? emailsRes.text() : null,
-					replyRes.ok ? replyRes.text() : null,
-				]);
-
-			const importResult = importData(
-				addressesContent,
-				phonesContent,
-				emailsContent,
-				replyContent,
-			);
+			const mod = await import("./data/addresses.csv?raw").catch(() => {
+				throw new Error("addresses.csv not found in src/data/");
+			});
+			const importResult = importFromNewCsv(mod.default);
 
 			if (!importResult.success) {
 				setResult({
@@ -151,17 +123,12 @@ const ImportPage = ({
 			<div className="space-y-4">
 				<h3 className="font-medium">Import from csv</h3>
 				<div className="p-4 bg-gray-50 dark:bg-slate-800 rounded text-sm">
-					<p className="font-medium mb-2">Files to import:</p>
+					<p className="font-medium mb-2">File to import:</p>
 					<ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
 						<li>addresses.csv (required)</li>
-						<li>phones.csv</li>
-						<li>emails.csv</li>
-						<li>reply_status.csv</li>
 					</ul>
 					<p className="mt-3 text-xs text-gray-500 dark:text-gray-400 border-t pt-2 dark:border-gray-700">
-						Note: Put your personal CSV files in public/import-data/. The
-						test-data folder contains sample files only. Copy files from
-						test-data if you want to try importing.
+						Note: Put your CSV file in public/data/addresses.csv.
 					</p>
 				</div>
 

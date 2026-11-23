@@ -78,7 +78,12 @@ export const defaultOptions: AppOptions = {
 		{ id: "statusNextNo", label: "No", order: 2, active: true },
 		{ id: "statusNextNishiyama", label: "N(西山家)", order: 3, active: true },
 		{ id: "statusNextHiguchi", label: "H(樋口家)", order: 4, active: true },
-		{ id: "statusNextNotDecided", label: "Not Decided", order: 5, active: true },
+		{
+			id: "statusNextNotDecided",
+			label: "Not Decided",
+			order: 5,
+			active: true,
+		},
 	],
 	printTypeOptions: [
 		{ id: "labelJp", label: "Label J", order: 1, active: true },
@@ -101,7 +106,11 @@ export const defaultOptions: AppOptions = {
 		{ id: "replyLetter", label: "Letter", order: 3, active: true },
 		{ id: "replyMessage", label: "Message", order: 4, active: true },
 		{ id: "replyEmail", label: "Email", order: 5, active: true },
-		{ id: "replyOther", label: "Other", order: 6, active: true },
+		{ id: "replyEcard", label: "Ecard", order: 6, active: true },
+		{ id: "replyPostCCard", label: "PostC&Card", order: 7, active: true },
+		{ id: "replyEmailCard", label: "Email&Card", order: 8, active: true },
+		{ id: "replyEmailLetter", label: "Email&Letter", order: 9, active: true },
+		{ id: "replyOther", label: "Other", order: 10, active: true },
 	],
 };
 
