@@ -55,7 +55,7 @@ const AddressList = ({
 	const [isPrintMode, setIsPrintMode] = useState(false);
 
 	const selectedAddress = selectedId
-		? filteredAddresses.find((a) => a.id === selectedId) || null
+		? addresses.find((a) => a.id === selectedId) || null
 		: null;
 
 	// Quick print counts
@@ -105,9 +105,6 @@ const AddressList = ({
 	const handleSelect = (id: string) => {
 		setSelectedId(id);
 		setIsCreating(false);
-		if (isSearchMode) {
-			exitSearchMode();
-		}
 	};
 
 	const handleNewAddress = () => {
@@ -367,7 +364,7 @@ const AddressList = ({
 
 				{/* Right: Form or Search Panel */}
 				<div className="w-1/2 border rounded p-4 dark:border-gray-700 overflow-auto">
-					{isSearchMode ? (
+					{isSearchMode && !selectedAddress ? (
 						<AddressSearchPanel
 							filters={advancedFilters}
 							onChange={setAdvancedFilters}

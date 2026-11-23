@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # Personal data 
-public/data/
+public/data
 
 # Playwright
 test-results/
