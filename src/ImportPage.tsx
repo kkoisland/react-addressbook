@@ -53,7 +53,9 @@ const ImportPage = ({
 		setResult(null);
 
 		try {
-			const response = await fetch(`${import.meta.env.BASE_URL}data/addresses.csv`);
+			const response = await fetch(
+				`${import.meta.env.BASE_URL}data/addresses.csv`,
+			);
 			if (!response.ok) {
 				throw new Error("addresses.csv not found in public/data/");
 			}
